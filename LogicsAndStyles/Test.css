@@ -1,0 +1,48 @@
+body{
+  margin: 0 auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+}
+
+h1{
+  padding-left: 10vw;
+}
+
+.menuBurger{
+  padding: 5vh 2vw 0 0;
+}
+
+.timer{
+  padding: 5vh 0 0 15vw;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+}
+
+.question{
+  padding: 10vh;
+  font-size: 5vh;
+}
+
+.answers{
+  padding: 10vh 15vw;
+  font-size: 5vh;
+}
+
+.hoverAnswer{
+  padding: 1vw;
+}
+
+.hoverAnswer:hover{
+  border: solid 5px red;
+}
+
+.hoverAnswer:active{
+  background-color: #555;
+}

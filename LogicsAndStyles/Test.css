@@ -1,48 +1,48 @@
-body{
+body {
   margin: 0 auto;
 }
 
-header{
+header {
   display: flex;
   justify-content: space-between;
   background-color: #f1f1f1;
 }
 
-h1{
+h1 {
   padding-left: 10vw;
 }
 
-.menuBurger{
+.menuBurger {
   padding: 5vh 2vw 0 0;
 }
 
-.timer{
+.timer {
   padding: 5vh 0 0 15vw;
 }
 
-.content{
+.content {
   display: flex;
   justify-content: space-between;
 }
 
-.question{
+.question {
   padding: 10vh;
   font-size: 5vh;
 }
 
-.answers{
+.answers {
   padding: 10vh 15vw;
   font-size: 5vh;
 }
 
-.hoverAnswer{
+.hoverAnswer {
   padding: 1vw;
 }
 
-.hoverAnswer:hover{
+.hoverAnswer:hover {
   border: solid 5px red;
 }
 
-.hoverAnswer:active{
+.hoverAnswer:active {
   background-color: #555;
 }

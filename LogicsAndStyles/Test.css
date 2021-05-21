@@ -46,3 +46,11 @@ h1 {
 .hoverAnswer:active {
   background-color: #555;
 }
+
+.rightAnswer {
+  background-color: rgba(24, 111, 111, 0.5);
+}
+
+.falseAnswer {
+  background-color: rgba(234, 111, 111, 0.5);
+}

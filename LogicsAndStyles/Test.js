@@ -24,7 +24,15 @@ function answerClick() {
   } else {
     event.target.classList.add("falseAnswer");
   }
-  yourAnswers.push(r);
+  yourAnswers.push(r); //Добавляем в массив ответ выбранный пользователем
 }
 
-console.log(yourAnswers);
+document.querySelector(".btnNext").onclick = nextCard; //привязываем функцию nextCard к кнопке "Далее"
+
+function nextCard() {
+  let i = 0;
+  i++;
+  let q = Object.keys(arrCard);
+  console.log(Object.keys(arrCard));
+  questionText.innerHTML = arrCard.q[i].question;
+}

@@ -93,7 +93,7 @@ div.button20:active {
 div.button20:after {
   content: "";
   position: absolute;
-  top: calc(50% - 0.6em/2);
+  top: calc(50% - 0.6em / 2);
   right: 0.6em;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
@@ -113,4 +113,10 @@ div.button20:after {
 .endList {
   font-family: Georgia, serif;
   font-size: 3vw;
+}
+
+.progress {
+  width: 0%;
+  height: 2px;
+  background-color: rgb(0, 255, 0);
 }

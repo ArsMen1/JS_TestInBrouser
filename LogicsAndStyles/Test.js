@@ -1,45 +1,40 @@
 const questionText = document.querySelector(".question"); //Блок вопроса
 const answerText = document.querySelector(".answers"); // Блок ответов
 const content = document.querySelector(".content"); // Блок ответов
+const progress = document.querySelector(".progress"); // Блок ответов
 
 let arrAnswers = Object.values(arrCard.card1.answers); //Массив ответов из изходника
 let yourAnswers = []; //Массив ваших ответов
 let rightAnswers = []; //Массив верных ответов
 
-let q = {};
-let i = 0;
+let q = {}; //Обьект для хранения текущей карточки
+let i = 0; //счеичик карточек
 let countRightAnswers = 0; // Количество верных ответов
 
 //Секундомер
 let secWatch = document.getElementById("secWatch"),
-  seconds = 0,
+  seconds = -1,
   minutes = 0,
   hours = 0,
-  t;
-function add() {
-  seconds++;
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
-    if (minutes >= 60) {
-      minutes = 0;
-      hours++;
+  add = () => {
+    seconds++;
+    if (seconds >= 60) {
+      seconds = 0;
+      minutes++;
+      if (minutes >= 60) {
+        minutes = 0;
+        hours++;
+      }
     }
-  }
-
-  secWatch.textContent =
-    (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
-    ":" +
-    (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
-    ":" +
-    (seconds > 9 ? seconds : "0" + seconds);
-
-  timer();
-}
-function timer() {
-  t = setTimeout(add, 1000);
-}
-timer();
+    secWatch.textContent =
+      (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+      ":" +
+      (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+      ":" +
+      (seconds > 9 ? seconds : "0" + seconds);
+    return (tt = setTimeout(add, 1000));
+  };
+add();
 
 questionText.innerHTML = arrCard.card1.question; //выводим на экран Вопрос
 
@@ -77,8 +72,8 @@ function answerClick() {
 
 document.querySelector(".button20").onclick = nextCard; //привязываем функцию nextCard к кнопке "Далее"
 
+//функция nextCard показывает следующий вопрос и ответы на экране
 function nextCard() {
-  //функция nextCard показывает следующий вопрос и ответы на экране
   i++;
   k++;
   if (k > 1) {
@@ -87,14 +82,18 @@ function nextCard() {
 
   q = Object.entries(arrCard);
 
+  progress.style.width = `${(i / q.length) * 100}%`; //Зеленая линия прогресс выполнения
+
   if (i > q.length - 1)
-    return (content.innerHTML = `<pre class="endList">
+    return (
+      clearTimeout(tt),
+      (content.innerHTML = `<pre class="endList">
   Вопросы закончились. 
 
   Ваше время: ${secWatch.textContent},
   Правильных ответов: ${countRightAnswers}, что состовляет ${
-      (countRightAnswers / q.length) * 100
-    }%.
+        (countRightAnswers / q.length) * 100
+      }%.
   Оценка: ${
     countRightAnswers / q.length > 0.89
       ? "Отлично"
@@ -103,7 +102,8 @@ function nextCard() {
       : countRightAnswers / q.length > 0.59
       ? "Удовлетватилельно"
       : "Неудовлетворительно"
-  }</pre>`);
+  }</pre>`)
+    );
   /*Ваши ответы:${yourAnswers}<br>
   Верные ответы:${rightAnswers}*/
 

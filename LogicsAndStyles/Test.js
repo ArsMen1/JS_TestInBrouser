@@ -1,7 +1,7 @@
 const questionText = document.querySelector(".question"); //Блок вопроса
 const answerText = document.querySelector(".answers"); // Блок ответов
-const content = document.querySelector(".content"); // Блок ответов
-const progress = document.querySelector(".progress"); // Блок ответов
+const content = document.querySelector(".content"); // Весь блок
+const progress = document.querySelector(".progress"); // Полоса прогресса
 
 let arrAnswers = Object.values(arrCard.card1.answers); //Массив ответов из изходника
 let yourAnswers = []; //Массив ваших ответов
@@ -49,7 +49,7 @@ arrAnswers.forEach((elem) => {
   answerText.appendChild(divs); // добавляем блок на экран
 });
 
-document.querySelector(".answers").onclick = answerClick; //Нa выбранный блок вешаем событие
+document.querySelector(".answers").onmouseup = answerClick; //Нa выбранный блок вешаем событие
 
 let k = 1;
 function answerClick() {
@@ -59,7 +59,6 @@ function answerClick() {
     event.target.classList.add("rightAnswer");
     rightAnswers += q[i][1].answers.right;
     if (k > 0) {
-      console.log("right");
       countRightAnswers++;
       k--;
     }
@@ -103,7 +102,8 @@ function nextCard() {
       : countRightAnswers / q.length > 0.59
       ? "Удовлетватилельно"
       : "Неудовлетворительно"
-  }</pre>`)
+  }</pre>
+  <a class="restart" href="">Начать заново</a>`)
     );
   /*Ваши ответы:${yourAnswers}<br>
   Верные ответы:${rightAnswers}*/

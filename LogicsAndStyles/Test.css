@@ -1,5 +1,6 @@
 body {
   margin: 0 auto;
+  user-select: none;
 }
 
 header {
@@ -37,7 +38,6 @@ h1 {
 .answersWrapper {
   padding: 10vh 15vw;
   font-size: 5vh;
-  user-select: none;
 }
 
 .hoverAnswer {

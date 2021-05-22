@@ -57,17 +57,20 @@ function answerClick() {
   let r = event.target.innerHTML;
   if (r == q[i][1].answers.right) {
     event.target.classList.add("rightAnswer");
-    rightAnswers += q[i][1].answers.right;
     if (k > 0) {
+      yourAnswers.push(r);
       countRightAnswers++;
       k--;
     }
   } else {
     event.target.classList.add("falseAnswer");
+    if (k > 0) {
+      yourAnswers.push(r);
+    }
     k--;
   }
   k = 0;
-  yourAnswers.push(r); //Добавляем в конец массива ответ выбранный пользователем
+  //Добавляем в конец массива ответ выбранный пользователем
 }
 
 document.querySelector(".button20").onclick = nextCard; //привязываем функцию nextCard к кнопке "Далее"
@@ -103,15 +106,12 @@ function nextCard() {
       ? "Удовлетватилельно"
       : "Неудовлетворительно"
   }</pre>
-  <a class="restart" href="">Начать заново</a>`)
+   <a class="restart" href="">Начать заново</a>
+   <div class="more">Посмотреть ошибки<div>`)
     );
-  /*Ваши ответы:${yourAnswers}<br>
-  Верные ответы:${rightAnswers}*/
-
   questionText.innerHTML = q[i][1].question; //следующий вопрос
   arrAnswers = Object.values(q[i][1].answers); //следующий Ответ
   shuffle(); //тасуем варианты ответа
-
   //Для каждого ответа сделать блок с индефикатором
   document
     .querySelectorAll(".hoverAnswer")
@@ -122,4 +122,15 @@ function nextCard() {
     divs.classList.add("hoverAnswer"); // присваеваем блокам класс для стилизации
     answerText.appendChild(divs); // добавляем блок на экран
   });
+  rightAnswers.push(q[i][1].answers.right);
 }
+
+//////////////////////////////////////////////////нужна кнопка просмотра оштибок
+/*
+document.querySelector(".more").onclick = viewErrors;
+
+function viewErrors() {
+  alert(123);
+  //return (content.innerHTML = `123`);
+}
+*/

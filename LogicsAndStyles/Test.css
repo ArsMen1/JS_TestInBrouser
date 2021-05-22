@@ -62,10 +62,11 @@ h1 {
   background-color: rgba(234, 111, 111, 0.5);
 }
 
-div.button20 {
+div.button20,
+.more {
   position: absolute;
-  left: 80vw;
-  top: 85vh;
+  left: 66vw;
+  top: 80vh;
   width: 4vw;
   height: 5vh;
   text-align: center;
@@ -91,12 +92,20 @@ div.button20 {
     4px 16px 7px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
 }
-div.button20:active {
+
+.more {
+  width: 20vw;
+}
+
+div.button20:active,
+.more:active {
   box-shadow: none;
   -webkit-transform: translate(-7px, 8px);
   transform: translate(-7px, 8px);
 }
-div.button20:after {
+
+div.button20:after,
+.more::after {
   content: "";
   position: absolute;
   top: calc(50% - 0.6em / 2);
@@ -130,8 +139,8 @@ div.button20:after {
 
 .restart {
   position: absolute;
-  left: 5vw;
-  top: 80vh;
+  left: 10vw;
+  top: 81vh;
   width: 15vw;
   height: 5vh;
   text-align: center;

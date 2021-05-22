@@ -67,6 +67,7 @@ function answerClick() {
     event.target.classList.add("falseAnswer");
     k--;
   }
+  k = 0;
   yourAnswers.push(r); //Добавляем в конец массива ответ выбранный пользователем
 }
 

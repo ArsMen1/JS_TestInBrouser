@@ -5,7 +5,7 @@ const progress = document.querySelector(".progress"); // Полоса прогр
 
 let arrAnswers = Object.values(arrCard.card1.answers); //Массив ответов из изходника
 let yourAnswers = []; //Массив ваших ответов
-let rightAnswers = []; //Массив верных ответов
+let rightAnswers = [arrCard.card1.answers.right]; //Массив верных ответов
 
 let q = {}; //Обьект для хранения текущей карточки
 let i = 0; //счеичик карточек
@@ -13,27 +13,27 @@ let countRightAnswers = 0; // Количество верных ответов
 
 //Секундомер
 let secWatch = document.getElementById("secWatch"),
-  seconds = -1,
-  minutes = 0,
-  hours = 0,
-  add = () => {
-    seconds++;
-    if (seconds >= 60) {
-      seconds = 0;
-      minutes++;
-      if (minutes >= 60) {
-        minutes = 0;
-        hours++;
-      }
+seconds = -1,
+minutes = 0,
+hours = 0,
+add = () => {
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
     }
-    secWatch.textContent =
-      (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
-      ":" +
-      (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
-      ":" +
-      (seconds > 9 ? seconds : "0" + seconds);
-    return (tt = setTimeout(add, 1000));
-  };
+  }
+  secWatch.textContent =
+  (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+  ":" +
+  (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+  ":" +
+  (seconds > 9 ? seconds : "0" + seconds);
+  return (tt = setTimeout(add, 1000));
+};
 add();
 
 questionText.innerHTML = arrCard.card1.question; //выводим на экран Вопрос
@@ -73,64 +73,84 @@ function answerClick() {
   //Добавляем в конец массива ответ выбранный пользователем
 }
 
-document.querySelector(".button20").onclick = nextCard; //привязываем функцию nextCard к кнопке "Далее"
+document.querySelector(".buttonNext").onclick = nextCard; //привязываем функцию nextCard к кнопке "Далее"
 
 //функция nextCard показывает следующий вопрос и ответы на экране
 function nextCard() {
+  if (k>0) return; 
   i++;
-  k++;
-  if (k > 1) {
-    k--;
+  k++;          // Для составления массивов ответов
+  if (k > 1) {  // Для избежания попадания в массив более одного ответа
+    k--;        
   }
-
-  q = Object.entries(arrCard);
+  q = Object.entries(arrCard); // обьект с вопросами и ответами
 
   progress.style.width = `${(i / q.length) * 100}%`; //Зеленая линия прогресс выполнения
-
-  if (i > q.length - 1)
+  if (i > q.length - 1) // после крйнего ответа, ваыводит на экран оценку
     return (
-      clearTimeout(tt),
+      clearTimeout(tt), //остановливает таймер сверху
       (content.innerHTML = `<pre class="endList">
-  Вопросы закончились. 
+        Вопросы закончились. 
 
-  Ваше время: ${secWatch.textContent},
-  Правильных ответов: ${countRightAnswers}, что состовляет ${
-        (countRightAnswers / q.length) * 100
-      }%.
-  Оценка: ${
-    countRightAnswers / q.length > 0.89
-      ? "Отлично"
-      : countRightAnswers / q.length > 0.74
-      ? "Хорошо"
-      : countRightAnswers / q.length > 0.59
-      ? "Удовлетватилельно"
-      : "Неудовлетворительно"
-  }</pre>
-   <a class="restart" href="">Начать заново</a>
-   <div class="more">Посмотреть ошибки<div>`)
-    );
+        Ваше время: ${secWatch.textContent},
+        Правильных ответов: ${countRightAnswers}, что состовляет ${
+          (countRightAnswers / q.length) * 100
+        }%.
+        Оценка: ${
+          countRightAnswers / q.length > 0.89
+          ? "Отлично"
+          : countRightAnswers / q.length > 0.74
+          ? "Хорошо"
+          : countRightAnswers / q.length > 0.59
+          ? "Удовлетватилельно"
+          : "Неудовлетворительно"
+        }</pre>
+        <a class="restart" href="">Начать заново</a>
+        <div class="more">Посмотреть ошибки<div>`),
+      document.querySelector(".more").onclick = viewErrors);
+
   questionText.innerHTML = q[i][1].question; //следующий вопрос
   arrAnswers = Object.values(q[i][1].answers); //следующий Ответ
-  shuffle(); //тасуем варианты ответа
+  shuffle(); //тасуем варианты ответов
+
   //Для каждого ответа сделать блок с индефикатором
   document
-    .querySelectorAll(".hoverAnswer")
+  .querySelectorAll(".hoverAnswer")
     .forEach((e) => e.parentNode.removeChild(e)); //отчистим блоки от старых ответов
-  arrAnswers.forEach((elem) => {
+    arrAnswers.forEach((elem) => {
     divs = document.createElement("div"); //создаем блок
     divs.append(elem); //присваеваем блоку значение из массива
     divs.classList.add("hoverAnswer"); // присваеваем блокам класс для стилизации
     answerText.appendChild(divs); // добавляем блок на экран
   });
-  rightAnswers.push(q[i][1].answers.right);
-}
+    rightAnswers.push(q[i][1].answers.right);// добавляем правельные ответы в соответствующий массив
+  }
 
-//////////////////////////////////////////////////нужна кнопка просмотра оштибок
-/*
-document.querySelector(".more").onclick = viewErrors;
-
+// Динамическая таблица со сравнением ответов
+let nnText='';
+let qwer='';
 function viewErrors() {
-  alert(123);
-  //return (content.innerHTML = `123`);
+  for (let nn=0; nn<i;nn++){
+    if(yourAnswers[nn]==rightAnswers[nn]){
+      qwer = `<td class='trueNd'>${yourAnswers[nn]}</td>`
+    }else{
+     qwer = `<td class='falseNd'>${yourAnswers[nn]}</td>`
+   }
+   nnText += `<tr>
+   <td>${nn+1}</td>
+   ${qwer}
+   <td>${rightAnswers[nn]}</td>
+   </tr>`
+ }
+ return (content.innerHTML = `
+  <table class='tableAnswers'>
+  <tr>
+  <th>Номер вопроса</th>
+  <th>Ваши ответы:</th>
+  <th>Верные ответы:</th>
+  </tr>
+  ${nnText}
+  </table>
+   <a class="restart" href="">Начать заново</a>`
+  );
 }
-*/

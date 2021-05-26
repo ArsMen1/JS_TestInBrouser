@@ -13,27 +13,27 @@ let countRightAnswers = 0; // Количество верных ответов
 
 //Секундомер
 let secWatch = document.getElementById("secWatch"),
-seconds = -1,
-minutes = 0,
-hours = 0,
-add = () => {
-  seconds++;
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
-    if (minutes >= 60) {
-      minutes = 0;
-      hours++;
+  seconds = -1,
+  minutes = 0,
+  hours = 0,
+  add = () => {
+    seconds++;
+    if (seconds >= 60) {
+      seconds = 0;
+      minutes++;
+      if (minutes >= 60) {
+        minutes = 0;
+        hours++;
+      }
     }
-  }
-  secWatch.textContent =
-  (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
-  ":" +
-  (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
-  ":" +
-  (seconds > 9 ? seconds : "0" + seconds);
-  return (tt = setTimeout(add, 1000));
-};
+    secWatch.textContent =
+      (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+      ":" +
+      (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+      ":" +
+      (seconds > 9 ? seconds : "0" + seconds);
+    return (tt = setTimeout(add, 1000));
+  };
 add();
 
 questionText.innerHTML = arrCard.card1.question; //выводим на экран Вопрос
@@ -53,23 +53,27 @@ document.querySelector(".answers").onmouseup = answerClick; //Нa выбранн
 
 let k = 1;
 function answerClick() {
-  q = Object.entries(arrCard);
-  let r = event.target.innerHTML;
+  q = Object.entries(arrCard); //создаем массив со всеми обьектами
+  let r = event.target.innerHTML; // создаем переменную в каторой будет лежать клик
   if (r == q[i][1].answers.right) {
-    event.target.classList.add("rightAnswer");
+    // события при нажатии на верный ответ
+    event.target.classList.add("rightAnswer"); // для зеленого фона на правильном ответе
     if (k > 0) {
-      yourAnswers.push(r);
-      countRightAnswers++;
-      k--;
+      // Проверка для чтения только перволго клика
+      yourAnswers.push(r); //Добавляет вариант ответа в масиив для каончнго отображения файлов при проверке
+      countRightAnswers++; // счетчик правильных ответов
+      k--; // не позволяет делать более одного клика на ответы
     }
   } else {
-    event.target.classList.add("falseAnswer");
+    // события при нажатии на неверный ответ
+    event.target.classList.add("falseAnswer"); // для красного фона на неправильном ответе
     if (k > 0) {
-      yourAnswers.push(r);
+      // Проверка для чтения только перволго клика
+      yourAnswers.push(r); //Добавляет вариант ответа в масиив для каончнго отображения файлов при проверке
     }
-    k--;
+    k--; // не позволяет делать более одного клика на ответы
   }
-  k = 0;
+  k = 0; // Если было слишком мног онажатий, сбрасывает их
   //Добавляем в конец массива ответ выбранный пользователем
 }
 
@@ -77,16 +81,18 @@ document.querySelector(".buttonNext").onclick = nextCard; //привязывае
 
 //функция nextCard показывает следующий вопрос и ответы на экране
 function nextCard() {
-  if (k>0) return; 
+  if (k > 0) return;
   i++;
-  k++;          // Для составления массивов ответов
-  if (k > 1) {  // Для избежания попадания в массив более одного ответа
-    k--;        
+  k++; // Для составления массивов ответов
+  if (k > 1) {
+    // Для избежания попадания в массив более одного ответа
+    k--;
   }
   q = Object.entries(arrCard); // обьект с вопросами и ответами
 
   progress.style.width = `${(i / q.length) * 100}%`; //Зеленая линия прогресс выполнения
-  if (i > q.length - 1) // после крйнего ответа, ваыводит на экран оценку
+  if (i > q.length - 1)
+    // после крйнего ответа, ваыводит на экран оценку
     return (
       clearTimeout(tt), //остановливает таймер сверху
       (content.innerHTML = `<pre class="endList">
@@ -94,20 +100,21 @@ function nextCard() {
 
         Ваше время: ${secWatch.textContent},
         Правильных ответов: ${countRightAnswers}, что состовляет ${
-          (countRightAnswers / q.length) * 100
-        }%.
+        (countRightAnswers / q.length) * 100
+      }%.
         Оценка: ${
           countRightAnswers / q.length > 0.89
-          ? "Отлично"
-          : countRightAnswers / q.length > 0.74
-          ? "Хорошо"
-          : countRightAnswers / q.length > 0.59
-          ? "Удовлетватилельно"
-          : "Неудовлетворительно"
+            ? "Отлично"
+            : countRightAnswers / q.length > 0.74
+            ? "Хорошо"
+            : countRightAnswers / q.length > 0.59
+            ? "Удовлетватилельно"
+            : "Неудовлетворительно"
         }</pre>
         <a class="restart" href="">Начать заново</a>
         <div class="more">Посмотреть ошибки<div>`),
-      document.querySelector(".more").onclick = viewErrors);
+      (document.querySelector(".more").onclick = viewErrors)
+    );
 
   questionText.innerHTML = q[i][1].question; //следующий вопрос
   arrAnswers = Object.values(q[i][1].answers); //следующий Ответ
@@ -115,34 +122,34 @@ function nextCard() {
 
   //Для каждого ответа сделать блок с индефикатором
   document
-  .querySelectorAll(".hoverAnswer")
+    .querySelectorAll(".hoverAnswer")
     .forEach((e) => e.parentNode.removeChild(e)); //отчистим блоки от старых ответов
-    arrAnswers.forEach((elem) => {
+  arrAnswers.forEach((elem) => {
     divs = document.createElement("div"); //создаем блок
     divs.append(elem); //присваеваем блоку значение из массива
     divs.classList.add("hoverAnswer"); // присваеваем блокам класс для стилизации
     answerText.appendChild(divs); // добавляем блок на экран
   });
-    rightAnswers.push(q[i][1].answers.right);// добавляем правельные ответы в соответствующий массив
-  }
+  rightAnswers.push(q[i][1].answers.right); // добавляем правельные ответы в соответствующий массив
+}
 
 // Динамическая таблица со сравнением ответов
-let nnText='';
-let qwer='';
+let nnText = "";
+let qwer = "";
 function viewErrors() {
-  for (let nn=0; nn<i;nn++){
-    if(yourAnswers[nn]==rightAnswers[nn]){
-      qwer = `<td class='trueNd'>${yourAnswers[nn]}</td>`
-    }else{
-     qwer = `<td class='falseNd'>${yourAnswers[nn]}</td>`
-   }
-   nnText += `<tr>
-   <td>${nn+1}</td>
+  for (let nn = 0; nn < i; nn++) {
+    if (yourAnswers[nn] == rightAnswers[nn]) {
+      qwer = `<td class='trueNd'>${yourAnswers[nn]}</td>`;
+    } else {
+      qwer = `<td class='falseNd'>${yourAnswers[nn]}</td>`;
+    }
+    nnText += `<tr>
+   <td>${nn + 1}</td>
    ${qwer}
    <td>${rightAnswers[nn]}</td>
-   </tr>`
- }
- return (content.innerHTML = `
+   </tr>`;
+  }
+  return (content.innerHTML = `
   <table class='tableAnswers'>
   <tr>
   <th>Номер вопроса</th>
@@ -151,6 +158,5 @@ function viewErrors() {
   </tr>
   ${nnText}
   </table>
-   <a class="restart" href="">Начать заново</a>`
-  );
+   <a class="restart" href="">Начать заново</a>`);
 }

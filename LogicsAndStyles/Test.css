@@ -58,7 +58,8 @@ h1 {
 }
 
 .hoverAnswer:active {
-  background-color: #ecc92b;
+  position: relative;
+  top: 5px;
 }
 
 .rightAnswer {
@@ -67,6 +68,10 @@ h1 {
 
 .falseAnswer {
   background-color: rgba(234, 111, 111, 0.5);
+}
+
+.neutralAnswer {
+  background-color: #ecc92b;
 }
 
 div.buttonNext,
@@ -87,16 +92,16 @@ div.buttonNext,
   padding: 0.5em 3em 0.5em 0.6em;
   background: linear-gradient(#ecc92b, #fce25b);
   box-shadow: 0 0 0 1px #fce25b inset, -1px 0px rgb(220, 195, 35),
-  -1px 1px rgb(192, 167, 7), -2px 1px rgb(219, 194, 34),
-  -2px 2px rgb(191, 166, 6), -3px 2px rgb(218, 193, 33),
-  -3px 3px rgb(190, 165, 5), -4px 3px rgb(217, 192, 32),
-  -4px 4px rgb(189, 164, 4), -5px 4px rgb(216, 191, 31),
-  -5px 5px rgb(188, 163, 3), -6px 5px rgb(215, 190, 30),
-  -6px 6px rgb(187, 162, 2), -7px 6px rgb(214, 189, 29),
-  -7px 7px rgb(186, 161, 1), -8px 7px rgb(213, 188, 28),
-  -8px 8px rgb(185, 160, 0), -7px 9px 1px rgba(0, 0, 0, 0.4),
-  -5px 11px 1px rgba(0, 0, 0, 0.2), -1px 13px 4px rgba(0, 0, 0, 0.2),
-  4px 16px 7px rgba(0, 0, 0, 0.3);
+    -1px 1px rgb(192, 167, 7), -2px 1px rgb(219, 194, 34),
+    -2px 2px rgb(191, 166, 6), -3px 2px rgb(218, 193, 33),
+    -3px 3px rgb(190, 165, 5), -4px 3px rgb(217, 192, 32),
+    -4px 4px rgb(189, 164, 4), -5px 4px rgb(216, 191, 31),
+    -5px 5px rgb(188, 163, 3), -6px 5px rgb(215, 190, 30),
+    -6px 6px rgb(187, 162, 2), -7px 6px rgb(214, 189, 29),
+    -7px 7px rgb(186, 161, 1), -8px 7px rgb(213, 188, 28),
+    -8px 8px rgb(185, 160, 0), -7px 9px 1px rgba(0, 0, 0, 0.4),
+    -5px 11px 1px rgba(0, 0, 0, 0.2), -1px 13px 4px rgba(0, 0, 0, 0.2),
+    4px 16px 7px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
 }
 
@@ -161,16 +166,16 @@ div.buttonNext:after,
   padding: 0.5em 3em 0.5em 0.6em;
   background: linear-gradient(#ecc92b, #fce25b);
   box-shadow: 0 0 0 1px #fce25b inset, -1px 0px rgb(220, 195, 35),
-  -1px 1px rgb(192, 167, 7), -2px 1px rgb(219, 194, 34),
-  -2px 2px rgb(191, 166, 6), -3px 2px rgb(218, 193, 33),
-  -3px 3px rgb(190, 165, 5), -4px 3px rgb(217, 192, 32),
-  -4px 4px rgb(189, 164, 4), -5px 4px rgb(216, 191, 31),
-  -5px 5px rgb(188, 163, 3), -6px 5px rgb(215, 190, 30),
-  -6px 6px rgb(187, 162, 2), -7px 6px rgb(214, 189, 29),
-  -7px 7px rgb(186, 161, 1), -8px 7px rgb(213, 188, 28),
-  -8px 8px rgb(185, 160, 0), -7px 9px 1px rgba(0, 0, 0, 0.4),
-  -5px 11px 1px rgba(0, 0, 0, 0.2), -1px 13px 4px rgba(0, 0, 0, 0.2),
-  4px 16px 7px rgba(0, 0, 0, 0.3);
+    -1px 1px rgb(192, 167, 7), -2px 1px rgb(219, 194, 34),
+    -2px 2px rgb(191, 166, 6), -3px 2px rgb(218, 193, 33),
+    -3px 3px rgb(190, 165, 5), -4px 3px rgb(217, 192, 32),
+    -4px 4px rgb(189, 164, 4), -5px 4px rgb(216, 191, 31),
+    -5px 5px rgb(188, 163, 3), -6px 5px rgb(215, 190, 30),
+    -6px 6px rgb(187, 162, 2), -7px 6px rgb(214, 189, 29),
+    -7px 7px rgb(186, 161, 1), -8px 7px rgb(213, 188, 28),
+    -8px 8px rgb(185, 160, 0), -7px 9px 1px rgba(0, 0, 0, 0.4),
+    -5px 11px 1px rgba(0, 0, 0, 0.2), -1px 13px 4px rgba(0, 0, 0, 0.2),
+    4px 16px 7px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
 }
 
@@ -187,32 +192,32 @@ div.buttonNext:after,
   right: 0.6em;
 }
 
-.gridAnswers{
+.gridAnswers {
   width: 99vw;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
-.tableAnswers{
+.tableAnswers {
   text-align: left;
   width: 99vw;
   font-size: 2vw;
 }
 
-.tableAnswers th{
+.tableAnswers th {
   border-bottom: 3px solid #000;
 }
 
-.tableAnswers td{
+.tableAnswers td {
   padding-top: 5vh;
   border-bottom: 3px solid #ecc92b;
 }
 
-.trueNd{
-  background-color: #80dd80
+.trueNd {
+  background-color: #80dd80;
 }
 
-.falseNd{
-  background-color: #f4b6b6
+.falseNd {
+  background-color: #f4b6b6;
 }

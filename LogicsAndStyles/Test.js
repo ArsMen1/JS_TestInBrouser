@@ -57,18 +57,18 @@ function answerClick() {
   let r = event.target.innerHTML; // создаем переменную в каторой будет лежать клик
   if (r == q[i][1].answers.right) {
     // события при нажатии на верный ответ
-    event.target.classList.add("rightAnswer"); // для зеленого фона на правильном ответе
     if (k > 0) {
       // Проверка для чтения только перволго клика
+      event.target.classList.add("neutralAnswer"); // вставьте в кавычки "rightAnswer" для зеленого фона на правильном ответе
       yourAnswers.push(r); //Добавляет вариант ответа в масиив для каончнго отображения файлов при проверке
       countRightAnswers++; // счетчик правильных ответов
       k--; // не позволяет делать более одного клика на ответы
     }
   } else {
     // события при нажатии на неверный ответ
-    event.target.classList.add("falseAnswer"); // для красного фона на неправильном ответе
     if (k > 0) {
       // Проверка для чтения только перволго клика
+      event.target.classList.add("neutralAnswer"); // вставьте в кавычки "falseAnswer" для красного фона на неправильном ответе
       yourAnswers.push(r); //Добавляет вариант ответа в масиив для каончнго отображения файлов при проверке
     }
     k--; // не позволяет делать более одного клика на ответы
@@ -133,23 +133,26 @@ function nextCard() {
   rightAnswers.push(q[i][1].answers.right); // добавляем правельные ответы в соответствующий массив
 }
 
-// Динамическая таблица со сравнением ответов
-let nnText = "";
-let qwer = "";
+// Динамическая таблица со сравнением ответов в конце
+// (ДЛЯ ТОГО ЧТОБЫ ОНА РАТОБАЛА НУЖНО УДАЛИТЬ МНОГОСТРОЧНЫЕК КОМЕНТАРИИ)
+// ↓
+/*
+let nnText='';
+let qwer='';
 function viewErrors() {
-  for (let nn = 0; nn < i; nn++) {
-    if (yourAnswers[nn] == rightAnswers[nn]) {
-      qwer = `<td class='trueNd'>${yourAnswers[nn]}</td>`;
-    } else {
-      qwer = `<td class='falseNd'>${yourAnswers[nn]}</td>`;
-    }
-    nnText += `<tr>
-   <td>${nn + 1}</td>
+  for (let nn=0; nn<i;nn++){
+    if(yourAnswers[nn]==rightAnswers[nn]){
+      qwer = `<td class='trueNd'>${yourAnswers[nn]}</td>`
+    }else{
+     qwer = `<td class='falseNd'>${yourAnswers[nn]}</td>`
+   }
+   nnText += `<tr>
+   <td>${nn+1}</td>
    ${qwer}
    <td>${rightAnswers[nn]}</td>
-   </tr>`;
-  }
-  return (content.innerHTML = `
+   </tr>`
+ }
+ return (content.innerHTML = `
   <table class='tableAnswers'>
   <tr>
   <th>Номер вопроса</th>
@@ -158,5 +161,7 @@ function viewErrors() {
   </tr>
   ${nnText}
   </table>
-   <a class="restart" href="">Начать заново</a>`);
+   <a class="restart" href="">Начать заново</a>`
+  );
 }
+*/

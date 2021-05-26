@@ -79,7 +79,7 @@ let arrCard = {
 };
 
 //Запрет на открытие Chrome DevTools
-document.oncontextmenu = new Function("return false;");
+document.oncontextmenu = new Function("return false;"); //Запрет правой кнопки
 
 document.onkeydown = function (e) {
   if (event.keyCode == 123) {
